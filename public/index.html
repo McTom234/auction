@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Auktion Abimania</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <div id="lobby" style="display: none">
+      <div class="main">
+      <div class="card">
+        Bitte warten Sie, bis die Auktion gestartet wird.
+      </div>
+      </div>
+    </div>
+    <div id="started" style="display: none">
+      <div class="main">
+        <div class="card">
+          <img src="unnamed.png" id="image" />
+          <span class="article" id="name">Müll</span>
+          <span class="price" id="preis">Aktuelles Gebot: 8,99€</span>
+        </div>
+        <div class="bet"> 
+          <input placeholder="Gebot eingeben" type="number" id="bid" />
+          <div class="sendbet" id="sendbid">Bieten!</div>
+        </div>
+      </div>
+    </div>
+    <div id="over" style="display: none">
+      <div class="main">
+        <div class="card">
+          Die Auktion ist beendet. Vielen Dank, dass Sie dabei waren.        
+        </div>
+        </div>
+    </div>
+  </body>
+
+  <script>
+    var socket = io({autoConnect: false});
+    const urlParams = new URLSearchParams(window.location.search);
+
+    socket.auth = {token: urlParams.get("t")};
+    socket.connect();
+    socket.emit("room", "client");
+
+    socket.on("price", (msg) => {
+      const el = document.getElementById("preis");
+      el.innerHTML = msg + "€";
+      el.style.animation = 'none';
+      el.offsetHeight; /* trigger reflow */
+      el.style.animation = null; 
+    });
+    socket.on("product", (msg) => {
+      const el = document.getElementById("name");
+      el.innerHTML = msg.name;
+      const img = document.getElementById("image");
+      img.setAttribute("src", msg.image);
+    });
+    document.getElementById("sendbid").addEventListener("click", () => {
+      const text = document.getElementById("bid").value;
+      socket.emit("bid", parseInt(text));
+    });
+  </script>
+  <script src="index.js"></script>
+</html>

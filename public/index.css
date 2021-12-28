@@ -1,0 +1,80 @@
+@font-face {
+	font-family: 'paris';
+	font-display:block;
+	src: local('paris'), url('./Parisien_Night.otf') format('opentype');
+}
+.started {
+    width:100vw;
+    height:100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:0;
+}
+.main{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+.card {
+    width:200pt;
+    height:250pt;
+    background-image: url(holz.png);
+    background-size: cover;
+    border-radius: 10pt;
+    box-shadow: 0pt 0pt 20pt 2pt rgba(0,0,0,0.5);
+    padding:20pt;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    font-family: paris;
+    color:white;
+}
+.card img {
+    object-fit: contain;
+    object-position: center;
+    width:80%;
+    border-radius: 5pt;
+}
+.article {
+    font-size: 40pt;
+    margin-top:5pt;     
+}
+.price {
+    font-size: 20pt;
+    color:rgb(220,220,220);
+    transform: scale(1);
+    animation: priceupdate 0.2s forwards;    
+}
+
+@keyframes priceupdate {
+    0% {transform:scale(1.0)}
+    70% {transform:scale(1.2)}
+    100% {transform:scale(1.0);}
+}
+.bet {
+    display: flex;
+    flex-direction: column;
+    padding: 10pt;
+}
+.bet input {
+    border:1pt solid gray;
+    border-radius: 10pt;
+    padding: 10pt;
+    text-align: center;
+    outline:none;
+}
+.bet input:focus {
+    border:1pt solid rgb(30, 163, 130);
+}
+.sendbet {
+    padding:10pt;
+    color:white;
+    background-color: rgb(30, 163, 130);
+    border-radius: 10pt;
+    margin-top: 10pt;
+    text-align: center;
+}

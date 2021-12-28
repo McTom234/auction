@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Auktion – Admin</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <h1>Auktion</h1>
+    <span id="user-count"></span> Nutzer online <br  />
+    Auktuelles Produkt: <span id="name"></span> <br  />
+    Aktuelles Bild: <img id="image"> <br  />
+
+
+    
+    <script>
+      var socket = io();
+      socket.emit("room", "stream");
+
+      socket.on('price', (msg) => {
+        const el = document.getElementById("preis");
+        console.log(msg);
+        el.innerHTML = msg;
+      });
+      socket.on('product', (msg) =>{
+        const el = document.getElementById("name");
+        el.innerHTML = msg.name;
+        const img = document.getElementById("image");
+        img.setAttribute("src", msg.image);
+      })
+      socket.on('user-count', (msg)=>{
+          document.getElementById("user-count").innerHTML = msg;
+      })
+    </script>
+</body>
+</html>

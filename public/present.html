@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>Auktion – Admin</title>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <body>
+      <div id="lobby" style="display: none">
+        Die Auktion wurde noch nicht gestartet
+        <button id="button-start">Auktion starten</button>
+      </div>
+      <div id="started" style="display: none">
+        <h1>Auktion – Presenter</h1>
+        Aktueller Preis: <span id="preis"></span> <br />
+        Auktuelles Produkt: <span id="name"></span> <br />
+        Aktuelles Bild: <img id="image" /> <br />
+        <button id="button-next">Nächstes Produkt</button>
+        <table>
+            <thead>
+                <th>Uhrzeit</th>
+                <th>Nutzername</th>
+                <th>Gebot</th>
+            </thead>
+            <tbody id="history">
+
+            </tbody>
+
+        </table>
+      </div>
+      <div id="over" style="display: none">
+        Die Auktion ist beendet. Vielen Dank, dass Sie dabei waren.
+        <button id="button-restart">Auktion starten</button>
+      </div>
+    </body>
+
+    <script>
+      var socket = io();
+      socket.emit("room", "presenter");
+
+      socket.on("price", (msg) => {
+        const el = document.getElementById("preis");
+        console.log(msg);
+        el.innerHTML = msg;
+      });
+      socket.on("product", (msg) => {
+        const el = document.getElementById("name");
+        el.innerHTML = msg.name;
+        const img = document.getElementById("image");
+        img.setAttribute("src", msg.image);
+      });
+      socket.on("history", (msg) => {
+        const table = document.getElementById("history");
+
+        if(msg.reset){
+            table.innerHTML = "";
+        }
+        for(const event of msg.payload){
+            const tr = document.createElement("tr");
+            for(const value of event){
+                const td = document.createElement("td");
+                td.innerText = value;
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+
+      })
+      const startButton = document.getElementById("button-start");
+      startButton.addEventListener("click", () => {
+        socket.emit("start");
+      });
+      const nextButton = document.getElementById("button-next");
+      nextButton.addEventListener("click", () => {
+        socket.emit("next-product");
+      });
+      const restartButton = document.getElementById("button-restart");
+      restartButton.addEventListener("click", () => {
+        socket.emit("start");
+      });
+    </script>
+    <script src="index.js"></script> 
+
+  </body>
+</html>

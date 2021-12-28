@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Produkt 1",
+        "image": "https://picsum.photos/seed/1/200/200",
+        "price": 1
+    },
+    {
+        "name": "Produkt 2",
+        "image": "https://picsum.photos/seed/2/200/200",
+        "price": 2
+    },
+    {
+        "name": "Produkt 3",
+        "image": "https://picsum.photos/seed/3/200/200",
+        "price": 3
+    },
+    {
+        "name": "Produkt 4",
+        "image": "https://picsum.photos/seed/4/200/200",
+        "price": 4
+    },
+    {
+        "name": "Produkt 5",
+        "image": "https://picsum.photos/seed/5/200/200",
+        "price": 5
+    }
+]
