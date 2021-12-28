@@ -4,47 +4,69 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
     <link rel="stylesheet" href="index.css" />
     <title>Auktion – Admin</title>
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <body>
-      <div id="lobby" style="display: none">
-        Die Auktion wurde noch nicht gestartet
-        <button id="button-start">Auktion starten</button>
+    <div class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Auktion – Admin</a>
+        <span class="navbar-text">
+          Nutzer online: <span id="online"></span>
+        </span>
+      </div>
+    </div>
+    <div id="content" class="container fluid mt-2">
+      <div id="lobby" style="display: none" class="">
+        Die Auktion wurde noch nicht gestartet <br  />
+        <button class="btn btn-primary mt-2" id="button-start">
+          Auktion starten
+        </button>
       </div>
       <div id="started" style="display: none">
-        <h1>Auktion – Presenter</h1>
-        Aktueller Preis: <span id="preis"></span> <br />
-        Auktuelles Produkt: <span id="name"></span> <br />
-        Aktuelles Bild: <img id="image" /> <br />
-        <button id="button-next">Nächstes Produkt</button>
-        <table>
-            <thead>
-                <th>Uhrzeit</th>
-                <th>Nutzername</th>
-                <th>Gebot</th>
-            </thead>
-            <tbody id="history">
-
-            </tbody>
-
+        <div class="mb-3 row">
+          <span class="col-sm-2">Aktuelles Gebot: </span>
+          <span class="col-sm-2" id="preis"></span>
+        </div>
+        <div class="mb-3 row">
+          <span class="col-sm-2">Produkt: </span>
+          <div class="col-sm-2" >
+            <span id="name"></span> <img id="image" class="rounded"/></div> 
+        </div>
+        
+        <button class="btn btn-primary" id="button-next">
+          Nächstes Produkt
+        </button>
+        <table class="table mt-2">
+          <thead>
+            <th>Uhrzeit</th>
+            <th>Nutzername</th>
+            <th>Gebot</th>
+          </thead>
+          <tbody id="history"></tbody>
         </table>
       </div>
       <div id="over" style="display: none">
-        Die Auktion ist beendet. Vielen Dank, dass Sie dabei waren.
-        <button id="button-restart">Auktion starten</button>
+        Die Auktion ist beendet. <br  />
+        <button class="btn btn-primary mt-2" id="button-restart">
+          Auktion neu starten
+        </button>
       </div>
-    </body>
-
+    </div>
     <script>
       var socket = io();
       socket.emit("room", "presenter");
 
       socket.on("price", (msg) => {
         const el = document.getElementById("preis");
-        console.log(msg);
         el.innerHTML = msg;
       });
       socket.on("product", (msg) => {
@@ -53,23 +75,25 @@
         const img = document.getElementById("image");
         img.setAttribute("src", msg.image);
       });
+      socket.on("user-count", (msg)=>{
+        document.getElementById("online").innerHTML = msg;
+      })
       socket.on("history", (msg) => {
         const table = document.getElementById("history");
 
-        if(msg.reset){
-            table.innerHTML = "";
+        if (msg.reset) {
+          table.innerHTML = "";
         }
-        for(const event of msg.payload){
-            const tr = document.createElement("tr");
-            for(const value of event){
-                const td = document.createElement("td");
-                td.innerText = value;
-                tr.appendChild(td);
-            }
-            table.appendChild(tr);
+        for (const event of msg.payload) {
+          const tr = document.createElement("tr");
+          for (const value of event) {
+            const td = document.createElement("td");
+            td.innerText = value;
+            tr.appendChild(td);
+          }
+          table.appendChild(tr);
         }
-
-      })
+      });
       const startButton = document.getElementById("button-start");
       startButton.addEventListener("click", () => {
         socket.emit("start");
@@ -83,7 +107,6 @@
         socket.emit("start");
       });
     </script>
-    <script src="index.js"></script> 
-
+    <script src="index.js"></script>
   </body>
 </html>

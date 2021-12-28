@@ -19,7 +19,7 @@ let state = {
   state: "lobby",
   currentHistory: [],
 };
-
+ 
 io.use((socket, next) => {
   const token = socket.handshake.auth.token;
   socket.token = token;
@@ -30,6 +30,16 @@ function log(string){
 
   });
 }
+
+function getUserCount(){
+  let users = io.sockets.adapter.rooms.get("client")?.size;
+  if (!users) users = 0;
+  return users;
+}
+let sendUserCount = () => {
+  io.in("stream").in("presenter").emit("user-count", getUserCount());
+};
+
 
 io.on("connection", (socket) => {
   console.log("User " + socket.token + " connected.");
@@ -55,9 +65,8 @@ io.on("connection", (socket) => {
     }
     if (msg == "presenter") {
       socket.join("presenter");
-
       socket.emit("history", { reset: true, payload: state.currentHistory });
-
+      socket.emit("user-count", getUserCount());
       socket.on("start", () => {
         state.state = "started";
         state.currentProduct = 0;
@@ -90,7 +99,12 @@ io.on("connection", (socket) => {
     }
     if (msg == "stream") {
       socket.join("stream");
+      socket.emit(getUserCount());
     }
+    sendUserCount();
+    socket.on("disconnect", ()=>{
+      sendUserCount();
+    })
   });
 
   socket.emit("state", state.state);
@@ -100,15 +114,8 @@ io.on("connection", (socket) => {
   }
 });
 
-let sendUserCount = () => {
-  let users = io.sockets.adapter.rooms.get("client")?.size;
-  if (!users) users = 0;
-  console.log(users + " users online");
 
-  io.in("stream").in("presenter").emit("user-count", users);
-};
-io.of("/").adapter.on("join-room", sendUserCount);
-io.of("/").adapter.on("leave-room", sendUserCount);
+
 
 const port = process.env.PORT || 3000;
 server.listen(port,"0.0.0.0", () => {
