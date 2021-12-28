@@ -110,6 +110,7 @@ let sendUserCount = () => {
 io.of("/").adapter.on("join-room", sendUserCount);
 io.of("/").adapter.on("leave-room", sendUserCount);
 
-server.listen(3000, () => {
-  console.log("listening on *:3000");
+const port = process.env.PORT || 3000;
+server.listen(port,"0.0.0.0", () => {
+  console.log("listening on *:" + port);
 });
