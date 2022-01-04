@@ -1,16 +1,16 @@
 import express from "express";
-import * as http from "http";
+import {createServer} from "http";
 import {Server} from "socket.io";
-import {State, AuctionSocket, UserData, History} from "./models/index.js";
+import {State, AuctionSocket, UserData} from "./models";
 import fetch from "node-fetch";
 import {verify} from "jsonwebtoken"
 import {readFileSync} from "fs";
 
-const products = JSON.parse(fs.readFileSync('./products.json', 'utf-8'))
+const products = JSON.parse(readFileSync('./products.json', 'utf-8'))
 
 const app = express();
 
-const server = http.createServer(app)
+const server = createServer(app)
 
 app.use(express.static("public"));
 
@@ -125,11 +125,12 @@ io.on("connection", (socket: AuctionSocket) => {
 				io.emit("state", state.state);
 				return;
 			}
-			const db = new sqlite3.Database("bids.sqlite");
-
-			const statement = db.prepare("INSERT INTO bids(user_id, given_name, family_name, product, bid) VALUES (?,?,?,?,?)");
-			for(const bid in state.currentHistory){
-			}
+			// const db = new sqlite3.Database("bids.sqlite");
+			//
+			// const statement = db.prepare("INSERT INTO bids(user_id, product, bid) VALUES (?,?,?,?,?)");
+			// for(const bid of state.currentHistory){
+			// 	statement.run(bid.user_id, bid.product, bid.value);
+			// }
 			state.currentProduct += 1;
 			state.currentPrice = products[state.currentProduct].price;
 			state.currentHistory = [];

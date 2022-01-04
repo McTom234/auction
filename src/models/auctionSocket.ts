@@ -1,7 +1,7 @@
 import {Socket} from "socket.io";
-import {UserData} from "./userData.js";
+import {UserData} from "./userData";
 
-export class AuctionSocket extends Socket {
+export interface AuctionSocket extends Socket {
 	user_data: UserData
 	type: string
 }

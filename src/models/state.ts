@@ -1,9 +1,9 @@
-import {History} from "./history.js";
+import {History} from "./history";
 
 export interface State {
     auctionId: number
     currentProduct: number
     currentPrice: number
-    state: string
+    state: 'lobby' | 'started' | 'over'
     currentHistory: History[]
 }

@@ -3,21 +3,21 @@
     "rootDir": "src",
     "outDir": "build",
     "sourceMap": true,
-    "target": "esnext",
-    "module": "commonjs",
+    "noImplicitAny": true,
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "importsNotUsedAsValues": "preserve",
+    "module": "es6",
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "types": [
-      "node"
-    ],
-    "typeRoots": [
-      "../node_modules/@types"
-    ]
+    "moduleResolution": "node",
   },
   "exclude": [
     "./node_modules",
-    "build"
+    "build",
+    "dist"
   ],
   "include": [
     "src/**/*"
