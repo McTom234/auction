@@ -25,7 +25,7 @@ function connectSocket(room){
     });
 
     socket.on("error", (msg) => {
-        showPage("error");
+        console.error("Server returned error: " + JSON.stringify(msg));
     })
 
     return socket

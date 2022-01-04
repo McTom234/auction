@@ -91,7 +91,7 @@
         }
         for (const event of msg.payload) {
           const tr = document.createElement("tr");
-          for (const value of event) {
+          for (const value of [event.date, event.name, event.value]) {
             const td = document.createElement("td");
             td.innerText = value;
             tr.appendChild(td);

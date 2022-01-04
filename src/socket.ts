@@ -4,8 +4,7 @@ import {Server} from "socket.io";
 import {State, AuctionSocket, UserData, History} from "./models/index.js";
 import fetch from "node-fetch";
 import {verify} from "jsonwebtoken"
-import * as sqlite3 from "sqlite3"
-import * as fs from "fs";
+import {readFileSync} from "fs";
 
 const products = JSON.parse(fs.readFileSync('./products.json', 'utf-8'))
 
@@ -33,8 +32,7 @@ io.use(async (socket: AuctionSocket, next) => {
 	fetch(serverUrl, {
 		method: 'POST',
 		body: JSON.stringify({secret: socket.handshake.auth.token})
-	})
-		.then(res => res.json())
+	}).then(res => res.json())
 		.then((json: any) =>{
 			try {
 				socket.user_data = verify(json.token, jwtSecret) as UserData;
@@ -43,15 +41,19 @@ io.use(async (socket: AuctionSocket, next) => {
 				const err = new Error("Invalid token");
 				next(err);
 			}
-		})
+		}).catch(error => {
+			console.error(error);
+		next(new Error("Error while validating token."));
+	})
 });
 
 function getUserCount(){
-	let users = io.sockets.adapter.rooms.get("client")?.size;
+	let users = io.sockets.adapter.rooms.get("client")?.size || 0;
 	if (!users) users = 0;
 	return users;
 }
 let sendUserCount = () => {
+	console.log("Sending user count");
 	io.in("stream").in("presenter").emit("user-count", getUserCount());
 };
 
@@ -76,14 +78,22 @@ io.on("connection", (socket: AuctionSocket) => {
 		socket.on("bid", msg => {
 			if (!msg) return;
 
+			if(socket.user_data.user_type !== "bidder"){
+				socket.emit("error", "Only bidders are not allowed to bid.");
+				return;
+			}
+
 			if (msg <= state.currentPrice) return;
 			state.currentPrice = msg;
 			io.emit("price", state.currentPrice);
 			state.currentHistory.push({
 				date: Date.now(),
 				name: `${socket.user_data.given_name} ${socket.user_data.family_name}`,
-				price: state.currentPrice
+				value: state.currentPrice,
+				product: state.currentProduct,
+				user_id: socket.user_data.user_id
 			});
+
 			io.in("presenter").emit("history", {
 				reset: false,
 				payload: [state.currentHistory[state.currentHistory.length - 1]],
@@ -93,7 +103,9 @@ io.on("connection", (socket: AuctionSocket) => {
 
 	if(socket.type === "presenter"){
 		socket.join("presenter");
+
 		socket.emit("history", { reset: true, payload: state.currentHistory });
+
 		socket.emit("user-count", getUserCount());
 		socket.on("start", () => {
 			state.state = "started";
@@ -129,7 +141,7 @@ io.on("connection", (socket: AuctionSocket) => {
 
 	if (socket.type === "stream") {
 		socket.join("stream");
-		socket.emit(`${getUserCount()}`);
+		socket.emit("user-count", getUserCount())
 	}
 
 	socket.emit("state", state.state);
