@@ -4,14 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node main.js"
+    "start": "node build/socket.js",
+    "build": "tsc",
+    "watch-ts": "tsc -w",
+    "watch-node": "nodemon build/socket.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/jsonwebtoken": "^8.5.6",
+    "@types/socket.io": "^3.0.2",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.6",
     "socket.io": "^4.4.0",
-    "socket.io-client": "^4.4.0"
+    "socket.io-client": "^4.4.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.5.4"
   }
 }
