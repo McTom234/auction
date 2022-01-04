@@ -60,10 +60,14 @@
           Auktion neu starten
         </button>
       </div>
+      <div id="error" style="display: none">
+        <div class="alert alert-danger"> Es ist ein Fehler aufgetreten.</div>
+      </div>
     </div>
+    <script src="index.js"></script>
+
     <script>
-      var socket = io();
-      socket.emit("room", "presenter");
+      var socket = connectSocket("presenter");
 
       socket.on("price", (msg) => {
         const el = document.getElementById("preis");
@@ -77,7 +81,8 @@
       });
       socket.on("user-count", (msg)=>{
         document.getElementById("online").innerHTML = msg;
-      })
+      });
+
       socket.on("history", (msg) => {
         const table = document.getElementById("history");
 

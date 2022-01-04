@@ -14,10 +14,9 @@
     Auktuelles Produkt: <span id="name"></span> <br  />
     Aktuelles Bild: <img id="image"> <br  />
 
-    
+    <script src="index.js"></script>
     <script>
-      var socket = io();
-      socket.emit("room", "stream");
+      var socket = connectSocket("stream");
 
       socket.on('price', (msg) => {
         const el = document.getElementById("preis");
