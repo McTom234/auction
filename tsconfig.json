@@ -1,21 +1,32 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "build",
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "target": "es5",
-    "jsx": "react",
     "allowJs": true,
-    "importsNotUsedAsValues": "preserve",
-    "module": "es6",
-    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
     "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
     "experimentalDecorators": true,
+    "importsNotUsedAsValues": "preserve",
+    "jsx": "react",
+    "module": "commonjs",
     "moduleResolution": "node",
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "rootDir": "src",
+    "sourceMap": true,
+    "target": "es2017",
+    "typeRoots": [
+      "./node_modules/@types/"
+    ],
+    "paths": {
+      "*": [
+        "node_modules/"
+      ]
+    }
   },
   "exclude": [
     "./node_modules",
+    "**/*.spec.ts",
     "build",
     "dist"
   ],

@@ -1,7 +1,9 @@
+const path = require("path");
 module.exports = {
     target: 'node',
-    entry: './src/socket.ts',
+    entry: './src/ts/socket.ts',
     mode: "production",
+    watch: true,
     watchOptions: {
         ignored: /node_modules/,
         poll: true
@@ -27,8 +29,7 @@ module.exports = {
         extensions: ['.ts', '.js']
     },
     output: {
-        filename: 'bundle.cjs'
+        filename: 'server.cjs',
+        path: path.join(__dirname, "/server")
     }
 }
-
-

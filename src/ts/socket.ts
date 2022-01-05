@@ -12,7 +12,7 @@ const app = express();
 
 const server = createServer(app)
 
-app.use(express.static("public"));
+app.use(express.static("dist"));
 
 const io = new Server(server);
 

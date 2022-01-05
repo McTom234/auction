@@ -1,6 +1,7 @@
 /.vscode
+/.idea
 /node_modules
 /package-lock.json
-/protocol44653.txt
-/build
-/dist
+/dist/*
+!/dist/*.html
+/server

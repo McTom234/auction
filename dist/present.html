@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auktion – Admin</title>
+  </head>
+  <body>
+    <div class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Auktion – Admin</a>
+        <span class="navbar-text">
+          Nutzer online: <span id="online"></span>
+        </span>
+      </div>
+    </div>
+    <div id="content" class="container fluid mt-2">
+      <div id="lobby" style="display: none" class="">
+        Die Auktion wurde noch nicht gestartet <br  />
+        <button class="btn btn-primary mt-2" id="button-start">
+          Auktion starten
+        </button>
+      </div>
+      <div id="started" style="display: none">
+        <div class="mb-3 row">
+          <span class="col-sm-2">Aktuelles Gebot: </span>
+          <span class="col-sm-2" id="preis"></span>
+        </div>
+        <div class="mb-3 row">
+          <span class="col-sm-2">Produkt: </span>
+          <div class="col-sm-2" >
+            <span id="name"></span> <img id="image" class="rounded"/></div>
+        </div>
+        
+        <button class="btn btn-primary" id="button-next">
+          Nächstes Produkt
+        </button>
+        <table class="table mt-2">
+          <thead>
+            <th>Uhrzeit</th>
+            <th>Nutzername</th>
+            <th>Gebot</th>
+          </thead>
+          <tbody id="history"></tbody>
+        </table>
+      </div>
+      <div id="over" style="display: none">
+        Die Auktion ist beendet. <br  />
+        <button class="btn btn-primary mt-2" id="button-restart">
+          Auktion neu starten
+        </button>
+      </div>
+      <div id="error" style="display: none">
+        <div class="alert alert-danger"> Es ist ein Fehler aufgetreten.</div>
+      </div>
+    </div>
+    
+    <script src="present.js" type="application/javascript"></script>
+  </body>
+</html>

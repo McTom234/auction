@@ -1,6 +1,7 @@
+import {io} from "socket.io-client";
 
-function showPage(name){
-    Array.from(document.getElementById("content").children).forEach((child) => {
+function showPage(name: any){
+    Array.from((document.getElementById("content")?.children as HTMLCollection)).forEach((child: any) => {
         if (child.id === name) {
             child.style.display = "block";
         } else {
@@ -8,7 +9,7 @@ function showPage(name){
         }
     })
 }
-function connectSocket(room){
+export function connectSocket(room: any){
     const socket = io({autoConnect: false});
     const urlParams = new URLSearchParams(window.location.search);
 
@@ -30,6 +31,3 @@ function connectSocket(room){
 
     return socket
 }
-
-
-

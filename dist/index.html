@@ -4,9 +4,7 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="index.css"/>
     <title>Auktion Abimania</title>
-    <script src="/socket.io/socket.io.js"></script>
 </head>
 <body>
 <div id="content">
@@ -48,26 +46,4 @@
 </div>
 </body>
 <script src="index.js"></script>
-
-<script>
-    const socket = connectSocket("client");
-
-    socket.on("price", (msg) => {
-        const el = document.getElementById("preis");
-        el.innerHTML = msg + "€";
-        el.style.animation = 'none';
-        el.offsetHeight; /* trigger reflow */
-        el.style.animation = null;
-    });
-    socket.on("product", (msg) => {
-        const el = document.getElementById("name");
-        el.innerHTML = msg.name;
-        const img = document.getElementById("image");
-        img.setAttribute("src", msg.image);
-    });
-    document.getElementById("sendbid").addEventListener("click", () => {
-        const text = document.getElementById("bid").value;
-        socket.emit("bid", parseInt(text));
-    });
-</script>
 </html>

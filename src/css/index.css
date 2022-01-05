@@ -1,7 +1,7 @@
 @font-face {
 	font-family: 'paris';
 	font-display:block;
-	src: local('paris'), url('./Parisien_Night.otf') format('opentype');
+	src: local('paris'), url('../assets/Parisien_Night.otf') format('opentype');
 }
 .started {
     width:100vw;
@@ -21,7 +21,7 @@
 .card {
     width:200pt;
     height:250pt;
-    background-image: url(holz.png);
+    background-image: url('../assets/holz.png');
     background-size: cover;
     border-radius: 10pt;
     box-shadow: 0pt 0pt 20pt 2pt rgba(0,0,0,0.5);
@@ -41,13 +41,13 @@
 }
 .article {
     font-size: 40pt;
-    margin-top:5pt;     
+    margin-top:5pt;
 }
 .price {
     font-size: 20pt;
     color:rgb(220,220,220);
     transform: scale(1);
-    animation: priceupdate 0.2s forwards;    
+    animation: priceupdate 0.2s forwards;
 }
 
 @keyframes priceupdate {
