@@ -3,7 +3,8 @@ module.exports = {
     target: 'web',
     entry: {
         index: './src/ts/pages/index.ts',
-        present: './src/ts/pages/present.ts'
+        present: './src/ts/pages/present.ts',
+        overlay: './src/ts/pages/overlay.ts'
     },
     mode: "production",
     watch: true,

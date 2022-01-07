@@ -42,4 +42,6 @@ document.getElementById('button-start').onclick = () => socket.emit('start');
 
 document.getElementById('button-next').onclick = () => socket.emit('next-product');
 
-document.getElementById('button-restart').onclick = () => socket.emit('start');
+document.getElementById('button-restart').onclick = () => {
+	if (confirm('Wirklich neustarten?')) socket.emit('start');
+};

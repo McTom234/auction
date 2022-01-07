@@ -60,14 +60,11 @@ function getUserCount () {
 
 let sendUserCount = () => {
 	console.log('Sending user count');
-	io.in('stream')
+	io.in('overlay')
 		.in('presenter')
 		.emit('user-count', getUserCount());
 };
 io.use((socket, next) => {
-	socket.on('connection', () => {
-		sendUserCount();
-	});
 	socket.on('disconnect', () => {
 		sendUserCount();
 	});
@@ -81,6 +78,8 @@ io.on('connection', (socket: AuctionSocket) => {
 	// client socket
 	if (socket.type === 'client') {
 		socket.join('client');
+
+		sendUserCount();
 
 		// bid event
 		socket.on('bid', msg => {
@@ -180,8 +179,8 @@ io.on('connection', (socket: AuctionSocket) => {
 	}
 
 	// stream socket
-	if (socket.type === 'stream') {
-		socket.join('stream');
+	if (socket.type === 'overlay') {
+		socket.join('overlay');
 
 		// status updates
 		socket.emit('user-count', getUserCount());

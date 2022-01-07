@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Auktion Stream Overlay</title>
+</head>
+<body>
+<div id="user-wrapper" class="user-count">
+    <div id="user-count"></div>
+</div>
+<div id="content">
+    <div id="lobby" style="display: none">
+        <span class="end-text">Bitte haben sie einen Moment Geduld, während wir auf weitere Mitbieter warten. Die Auktion wird bald gestartet.</span>
+    </div>
+    <div id="started" class="product" style="display: none">
+        <div class="product-content">
+            <img id="image"/>
+            <span id="name" class="product-name"></span>
+            <span class="product-price">Aktueller Preis: <b id="preis"></b></span>
+        </div>
+        <div class="new-price-wrapper">
+            <span id="new-preis" class="new-price"></span>
+        </div>
+    </div>
+    <div id="over" style="display: none">
+        <span class="end-text">Die Auktion ist beendet. Herzlichen Dank und Glückwunsch an alle Meistbietenden.</span>
+    </div>
+    <div id="error" style="display: none"></div>
+</div>
+<script src="overlay.js"></script>
+</body>
+</html>

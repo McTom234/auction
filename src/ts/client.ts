@@ -16,10 +16,10 @@ function showPage (name: string) {
 		});
 
 	// TODO: fallback
-	if (empty) {
-		if (name !== 'empty') document.getElementById('emptyErrorPane').style.display = 'block';
-		else return;
-	} else document.getElementById('emptyErrorPane').style.display = 'none';
+	// if (empty) {
+	// 	if (name !== 'empty') document.getElementById('emptyErrorPane').style.display = 'block';
+	// 	else return;
+	// } else document.getElementById('emptyErrorPane').style.display = 'none';
 }
 
 // connect socket to server default function

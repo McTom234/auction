@@ -1,0 +1,127 @@
+@font-face {
+    font-family: 'paris';
+    font-display: block;
+    src: local('paris'), url(../assets/Parisien_Night.otf) format('opentype');
+}
+
+body {
+    font-family: paris, system-ui;
+    font-size: 30px;
+    line-height: 1;
+    margin: 0;
+    background: transparent;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.user-count {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    letter-spacing: 1px;
+    color: white;
+    border-bottom-right-radius: 16px;
+    background: url(../assets/holz.png);
+}
+
+.product {
+    position: fixed;
+    top: 0;
+    right: 0;
+    border-bottom-left-radius: 16px;
+    background: url(../assets/holz.png);
+}
+
+.product-content {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 20px;
+    color:white;
+}
+
+.product-content img {
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    border-radius: 8px;
+    min-width: 20vw;
+}
+
+.product-content .product-name {
+    margin-top: 10px;
+    font-size: 50px;
+    font-weight: 1000;
+    letter-spacing: 3px;
+}
+
+.product-content .product-price {
+    letter-spacing: 1px;
+    font-size: 40px;
+}
+
+.product-content .product-price b {
+    font-weight: 100;
+}
+
+.product .new-price-wrapper {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-100%);
+    text-align: center;
+}
+
+.product .new-price-wrapper .new-price {
+    padding: 60px 60px 10px;
+    border-radius: 100px;
+    color: white;
+    display: inline-block;
+    font-size: 200px;
+    background: url(../assets/holz.png);
+    transform: scale(0);
+    animation-name: newprice;
+    animation-duration: 2s;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+}
+
+@keyframes newprice {
+    0% {
+        transform: scale(0) translateY(0%) translateX(0%);
+    }
+    45% {
+        transform: scale(1) translateY(-100%) translateX(40%);
+    }
+    99% {
+        transform: scale(0.6) translateY(600%) translateX(60%);
+    }
+    100% {
+        transform: scale(0) translateY(10000%) translateX(0%);
+    }
+}
+
+#over, #lobby {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    text-align: center;
+}
+
+.end-text {
+    font-size: 40px;
+    color: white;
+    margin: 0 100px;
+    background: url(../assets/holz.png);
+    letter-spacing: 2px;
+    border-radius: 60px;
+    padding: 20px 20px 10px;
+    display: inline-block;
+}
