@@ -42,12 +42,12 @@ io.use(async(socket: AuctionSocket, next) => {
 				socket.type = socket.handshake.auth.type;
 				next();
 			} catch (e) {
-				next(new Error('Invalid token'));
+				next(new Error('Scanne den QR-Code erneut oder überprüfe, ob Du den Link richtig abgeschrieben hast!'));
 			}
 		})
 		.catch(error => {
 			console.error(error);
-			next(new Error('Error while validating token.'));
+			next(new Error('Authentifizierungsserver nicht erreichbar. Überprüfe deine Internetverbindung!'));
 		});
 });
 
@@ -86,7 +86,7 @@ io.on('connection', (socket: AuctionSocket) => {
 			if (!msg) return;
 
 			if (socket.user_data.user_type !== 'bidder') {
-				return socket.emit('error', 'Only bidders are not allowed to bid.');
+				return socket.emit('error', 'Dein Nutzer hat keine Berechtigung, Gebote abzusenden. ');
 			}
 
 			// validation

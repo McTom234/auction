@@ -1,7 +1,7 @@
 import { io } from 'socket.io-client';
 
 // component change
-function showPage (name: string) {
+function showPage (name: string, msg?: { id: string, text: string }) {
 	let empty: boolean = true;
 
 	// iterate components
@@ -10,6 +10,7 @@ function showPage (name: string) {
 			if (child.id === name) {
 				child.style.display = 'block';
 				empty = false;
+				if (msg) document.getElementById(msg.id).innerText = msg.text;
 			} else {
 				child.style.display = 'none';
 			}
@@ -38,7 +39,7 @@ export function connectSocket (room: any) {
 	// connect_error event
 	socket.on('connect_error', err => {
 		console.log('Server returned error during connection: ' + JSON.stringify(err));
-		showPage('error');
+		showPage('error', {id: 'error-text', text: err.message});
 	});
 
 	// state event
@@ -49,6 +50,7 @@ export function connectSocket (room: any) {
 	// error event
 	socket.on('error', msg => {
 		console.error('Server returned error: ' + JSON.stringify(msg));
+		showPage('error', {id: 'error-text', text: msg});
 	});
 
 	return socket;
