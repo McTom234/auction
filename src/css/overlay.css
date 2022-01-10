@@ -24,7 +24,8 @@ body {
     letter-spacing: 1px;
     color: white;
     border-bottom-right-radius: 16px;
-    background: url(../assets/holz.png);
+    background: url(../assets/holz.jpg);
+    background-size: cover;
 }
 
 .product {
@@ -32,7 +33,8 @@ body {
     top: 0;
     right: 0;
     border-bottom-left-radius: 16px;
-    background: url(../assets/holz.png);
+    background: url(../assets/holz.jpg);
+    background-size: cover;
 }
 
 .product-content {
@@ -83,7 +85,8 @@ body {
     color: white;
     display: inline-block;
     font-size: 200px;
-    background: url(../assets/holz.png);
+    background: url(../assets/holz.jpg);
+    background-size: cover;
     transform: scale(0);
     animation-name: newprice;
     animation-duration: 2s;
@@ -119,7 +122,8 @@ body {
     font-size: 40px;
     color: white;
     margin: 0 100px;
-    background: url(../assets/holz.png);
+    background: url(../assets/holz.jpg);
+    background-size: cover;
     letter-spacing: 2px;
     border-radius: 60px;
     padding: 20px 20px 10px;

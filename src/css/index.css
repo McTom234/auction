@@ -21,10 +21,10 @@
 .card {
     width:200pt;
     height:280pt;
-    background-image: url('../assets/holz.png');
+    background-image: url(../assets/holz.jpg);
     background-size: cover;
     border-radius: 10pt;
-    box-shadow: 0pt 0pt 20pt 2pt rgba(0,0,0,0.5);
+    box-shadow: 0 0 20pt 2pt rgba(0,0,0,0.5);
     padding:20pt;
     display: flex;
     align-items: center;
@@ -82,4 +82,5 @@
     border-radius: 10pt;
     margin-top: 10pt;
     text-align: center;
+    border: none;
 }

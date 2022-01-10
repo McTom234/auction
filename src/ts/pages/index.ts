@@ -48,6 +48,8 @@ document.getElementById('sendbid').onclick = () => {
 	else document.getElementById('bid')
 		.classList
 		.add('invalid');
+
+	(document.getElementById('bid') as HTMLInputElement).value = '';
 };
 
 // price input oninput listener - removing invalid class
