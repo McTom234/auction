@@ -20,7 +20,7 @@
 }
 .card {
     width:200pt;
-    height:250pt;
+    height:280pt;
     background-image: url('../assets/holz.png');
     background-size: cover;
     border-radius: 10pt;
@@ -42,6 +42,9 @@
 .article {
     font-size: 40pt;
     margin-top:5pt;
+}
+.description {
+    text-align: center;
 }
 .price {
     font-size: 20pt;
