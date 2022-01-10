@@ -2,26 +2,31 @@
     {
         "name": "Produkt 1",
         "image": "https://picsum.photos/seed/1/200/200",
+        "description": "In faucibus elit in tellus molestie, ultrices porta diam suscipit. Phasellus ultrices libero eu sed.",
         "price": 1
     },
     {
         "name": "Produkt 2",
         "image": "https://picsum.photos/seed/2/200/200",
+        "description": "Nulla auctor consectetur sagittis. Pellentesque ligula felis, auctor vestibulum odio ullamcorper, tincidunt turpis duis.",
         "price": 2
     },
     {
         "name": "Produkt 3",
         "image": "https://picsum.photos/seed/3/200/200",
+        "description": "Duis eu consequat ex. Vivamus cursus est eu velit porta leo.",
         "price": 3
     },
     {
         "name": "Produkt 4",
         "image": "https://picsum.photos/seed/4/200/200",
+        "description": "Cras orci lacus, pellentesque id venenatis et, pellentesque at ligula. Vivamus consectetur consequat quam, sit amet fringilla leo.",
         "price": 4
     },
     {
         "name": "Produkt 5",
         "image": "https://picsum.photos/seed/5/200/200",
+        "description": "Sed faucibus nibh a mauris porttitor ex.",
         "price": 5
     }
 ]

@@ -27,6 +27,7 @@ socket.on('product', msg => {
 
 	document.getElementById('image')
 		.setAttribute('src', msg.image);
+	document.getElementById('description').innerHTML = msg.description;
 
 	// TODO: description
 });

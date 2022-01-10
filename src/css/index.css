@@ -28,16 +28,18 @@
     padding:20pt;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     flex-direction: column;
     font-family: paris;
     color:white;
 }
+
 .card img {
     object-fit: contain;
     object-position: center;
     width:80%;
     border-radius: 5pt;
+    margin-top: 20px;
 }
 .article {
     font-size: 40pt;

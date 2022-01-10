@@ -115,7 +115,7 @@ io.on('connection', (socket: AuctionSocket) => {
 			};
 			state.currentHistory.push(bidHistory);
 			logBid(bidHistory);
-			
+
 			// emit to presenters
 			io.in('presenter')
 				.emit('history', {
@@ -169,11 +169,11 @@ io.on('connection', (socket: AuctionSocket) => {
 			state.currentProduct += 1;
 			state.currentPrice = products[state.currentProduct].price;
 			state.currentHistory = [];
-
+ 
 			// publish
 			io.in('presenter')
 				.emit('history', {
-					reset: true,
+					reset: true, 
 					payload: []
 				});
 			io.emit('product', products[state.currentProduct]);

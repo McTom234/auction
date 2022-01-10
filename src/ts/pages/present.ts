@@ -10,7 +10,7 @@ socket.on('price', msg => document.getElementById('preis').innerHTML = msg);
 // product event
 socket.on('product', msg => {
 	document.getElementById('name').innerHTML = msg.name;
-
+	document.getElementById('description').innerHTML = msg.description;
 	document.getElementById('image')
 		.setAttribute('src', msg.image);
 });
