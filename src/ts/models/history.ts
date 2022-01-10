@@ -1,4 +1,4 @@
-export interface History {
+export interface BidHistory {
 	date: number;
 	product: number;
 	user_id: number;

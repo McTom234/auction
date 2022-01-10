@@ -4,8 +4,9 @@ import { createServer } from 'http';
 import { verify } from 'jsonwebtoken';
 import fetch from 'node-fetch';
 import { Server } from 'socket.io';
-import { AuctionSocket, State, UserData } from './models';
+import { AuctionSocket, State, UserData, BidHistory } from './models';
 import { validate } from './util/validFormat';
+import fs from "fs";
 
 // products DB file
 const products = JSON.parse(readFileSync('./products.json', 'utf-8'));
@@ -71,6 +72,14 @@ io.use((socket, next) => {
 	next();
 });
 
+
+// bid logging
+function logBid(hist: BidHistory){
+	fs.appendFile("log.csv", [hist.date,hist.product, hist.user_id, hist.name, hist.value].join(",") + "\n" , (err)=>{
+		if(err) throw err;
+	})
+}
+
 // connection observer
 io.on('connection', (socket: AuctionSocket) => {
 	console.log(`User ${ socket.user_data.user_id } (${ socket.user_data.given_name } ${ socket.user_data.family_name }) connected.`);
@@ -97,14 +106,16 @@ io.on('connection', (socket: AuctionSocket) => {
 			// add bid
 			state.currentPrice = newPriceInput;
 			io.emit('price', state.currentPrice);
-			state.currentHistory.push({
-				                          date: Date.now(),
-				                          name: `${ socket.user_data.given_name } ${ socket.user_data.family_name }`,
-				                          value: state.currentPrice,
-				                          product: state.currentProduct,
-				                          user_id: socket.user_data.user_id
-			                          });
-
+			const bidHistory:BidHistory = {
+				date: Date.now(),
+				name: `${ socket.user_data.given_name } ${ socket.user_data.family_name }`,
+				value: state.currentPrice,
+				product: state.currentProduct,
+				user_id: socket.user_data.user_id
+			};
+			state.currentHistory.push(bidHistory);
+			logBid(bidHistory);
+			
 			// emit to presenters
 			io.in('presenter')
 				.emit('history', {
@@ -153,14 +164,6 @@ io.on('connection', (socket: AuctionSocket) => {
 				state.state = 'over';
 				return io.emit('state', state.state);
 			}
-
-			// TODO: DB write
-			// const db = new sqlite3.Database("bids.sqlite");
-			//
-			// const statement = db.prepare("INSERT INTO bids(user_id, product, bid) VALUES (?,?,?,?,?)");
-			// for(const bid of state.currentHistory){
-			// 	statement.run(bid.user_id, bid.product, bid.value);
-			// }
 
 			// state update
 			state.currentProduct += 1;
