@@ -1,4 +1,4 @@
-export function validate (input: string | number, currentPrice: number): Error | number {
+export function validate (input: string | number, currentPrice: number, minAdd: number = 0.01): Error | number {
 	input = input.toString();
 
 	if (!(/^\d+([\,\.][0-9][0-9]?)?$/.test(input))) return new Error('Du verwendest nicht erlaubte Zeichen!');
@@ -6,7 +6,7 @@ export function validate (input: string | number, currentPrice: number): Error |
 	input = parseFloat(parseFloat(input.replace(',', '.'))
 		                   .toFixed(2));
 
-	if (input <= currentPrice) return new Error('Dein Gebot muss höher sein, als das Letzte!');
+	if (input < (currentPrice + minAdd)) return new Error('Dein Gebot muss höher sein, als das Letzte!');
 
 	return input;
 }

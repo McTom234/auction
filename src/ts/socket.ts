@@ -11,15 +11,22 @@ import fs from 'fs';
 // products DB file
 const products = JSON.parse(readFileSync('./products.json', 'utf-8'));
 
+// config file
+const config: {
+	server: {
+		serverUrl: string
+		jwtSecret: string
+	}
+	auction: {
+		minAmount: number
+	}
+} = JSON.parse(readFileSync('./config.json', 'utf-8'));
+
 // socket.io and http server setup
 const app = express();
 const server = createServer(app);
 app.use(express.static('dist'));
 const io = new Server(server);
-
-// auth data
-const jwtSecret = '$2a$10$wrLKVqw6/3hw+SE3LR0YmA9t4i5zDOgab23iLnMM6BpvbeIucwzoE';
-const serverUrl = 'https://vbid.cluborganizer.de/token';
 
 // current state
 let state: State = {
@@ -32,14 +39,14 @@ let state: State = {
 
 // auth middleware
 io.use(async(socket: AuctionSocket, next) => {
-	fetch(serverUrl, {
+	fetch(config.server.serverUrl, {
 		method: 'POST',
 		body: JSON.stringify({ secret: socket.handshake.auth.token })
 	})
 		.then(res => res.json())
 		.then((json: any) => {
 			try {
-				socket.user_data = verify(json.token, jwtSecret) as UserData;
+				socket.user_data = verify(json.token, config.server.jwtSecret) as UserData;
 				socket.type = socket.handshake.auth.type;
 				next();
 			} catch (e) {
@@ -99,7 +106,9 @@ io.on('connection', (socket: AuctionSocket) => {
 			}
 
 			// validation
-			const newPriceInput = validate(msg, state.currentPrice);
+			let minAdd = 0.01;
+			if (config.auction.minAmount !== undefined) minAdd = config.auction.minAmount;
+			const newPriceInput = validate(msg, state.currentPrice, minAdd);
 
 			if (newPriceInput instanceof Error) return socket.emit('error', newPriceInput.message);
 
