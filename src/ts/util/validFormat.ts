@@ -1,7 +1,7 @@
 export function validate (input: string | number, currentPrice: number): Error | number {
 	input = input.toString();
 
-	if (! (/^\d+([\,\.][0-9][0-9]?)?$/.test(input)) ) return new Error('Du verwendest nicht erlaubte Zeichen!');
+	if (!(/^\d+([\,\.][0-9][0-9]?)?$/.test(input))) return new Error('Du verwendest nicht erlaubte Zeichen!');
 
 	input = parseFloat(parseFloat(input.replace(',', '.'))
 		                   .toFixed(2));

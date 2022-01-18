@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 import { Server } from 'socket.io';
 import { AuctionSocket, State, UserData, BidHistory } from './models';
 import { validate } from './util/validFormat';
-import fs from "fs";
+import fs from 'fs';
 
 // products DB file
 const products = JSON.parse(readFileSync('./products.json', 'utf-8'));
@@ -74,10 +74,10 @@ io.use((socket, next) => {
 
 
 // bid logging
-function logBid(hist: BidHistory){
-	fs.appendFile("log.csv", [hist.date,hist.product, hist.user_id, hist.name, hist.value].join(",") + "\n" , (err)=>{
-		if(err) throw err;
-	})
+function logBid (hist: BidHistory) {
+	fs.appendFile('log.csv', [hist.date, hist.product, hist.user_id, hist.name, hist.value].join(',') + '\n', (err) => {
+		if (err) throw err;
+	});
 }
 
 // connection observer
@@ -106,7 +106,7 @@ io.on('connection', (socket: AuctionSocket) => {
 			// add bid
 			state.currentPrice = newPriceInput;
 			io.emit('price', state.currentPrice);
-			const bidHistory:BidHistory = {
+			const bidHistory: BidHistory = {
 				date: Date.now(),
 				name: `${ socket.user_data.given_name } ${ socket.user_data.family_name }`,
 				value: state.currentPrice,
@@ -169,11 +169,11 @@ io.on('connection', (socket: AuctionSocket) => {
 			state.currentProduct += 1;
 			state.currentPrice = products[state.currentProduct].price;
 			state.currentHistory = [];
- 
+
 			// publish
 			io.in('presenter')
 				.emit('history', {
-					reset: true, 
+					reset: true,
 					payload: []
 				});
 			io.emit('product', products[state.currentProduct]);
