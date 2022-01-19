@@ -47,6 +47,13 @@ io.use(async(socket: AuctionSocket, next) => {
 		.then((json: any) => {
 			try {
 				socket.user_data = verify(json.token, config.server.jwtSecret) as UserData;
+
+
+				// non-admin users are only allowed to connect as a client
+				if (socket.user_data.user_type !== 'admin' &&  socket.type !== "client") {
+					next(new Error("Du hast keine Rechte, auf diese Seite zuzugreifen."));
+				}
+
 				socket.type = socket.handshake.auth.type;
 				next();
 			} catch (e) {
