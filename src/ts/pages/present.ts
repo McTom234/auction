@@ -5,7 +5,7 @@ const socket = connectSocket('presenter');
 
 /* EVENTS */
 // price event
-socket.on('price', msg => document.getElementById('preis').innerHTML = msg);
+socket.on('price', msg => document.getElementById('preis').innerHTML = msg.toFixed(2) + " €");
 
 // product event
 socket.on('product', msg => {
@@ -27,13 +27,15 @@ socket.on('history', msg => {
 	for (const event of msg.payload) {
 		const tr = document.createElement('tr');
 
-		for (const value of [event.date, event.name, event.value]) {
+		const time = new Date(event.date).toLocaleString("de-de");
+		const bid = event.value.toFixed(2) + " €";
+		for (const value of [time, event.name, bid]) {
 			const td = document.createElement('td');
 			td.innerText = value;
 			tr.appendChild(td);
 		}
 
-		table.appendChild(tr);
+		table.prepend(tr);
 	}
 });
 
