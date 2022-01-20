@@ -8,7 +8,7 @@ function showPage (name: string, msg?: { id: string, text: string }) {
 	Array.from((document.getElementById('content').children as HTMLCollection))
 		.forEach((child: HTMLElement) => {
 			if (child.id === name) {
-				child.style.display = 'block';
+				child.style.display = null;
 				empty = false;
 				if (msg) document.getElementById(msg.id).innerText = msg.text;
 			} else {

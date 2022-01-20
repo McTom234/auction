@@ -1,4 +1,4 @@
-import '../../css/overlay.css';
+//import '../../css/overlay.css';
 import { connectSocket } from '../client';
 
 const socket = connectSocket('overlay');

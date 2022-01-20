@@ -4,9 +4,10 @@ module.exports = {
     entry: {
         index: './src/ts/pages/index.ts',
         present: './src/ts/pages/present.ts',
-        overlay: './src/ts/pages/overlay.ts'
+        overlay: ['./src/ts/pages/overlay.ts', './src/css/overlay.css'],
+        screen: ['./src/ts/pages/overlay.ts', './src/css/screen.css']
     },
-    mode: "production",
+    mode: "development",
     watch: true,
     watchOptions: {
         ignored: /node_modules/,

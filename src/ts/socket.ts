@@ -50,11 +50,12 @@ io.use(async(socket: AuctionSocket, next) => {
 
 
 				// non-admin users are only allowed to connect as a client
+
+				socket.type = socket.handshake.auth.type;
 				if (socket.user_data.user_type !== 'admin' &&  socket.type !== "client") {
 					next(new Error("Du hast keine Rechte, auf diese Seite zuzugreifen."));
 				}
 
-				socket.type = socket.handshake.auth.type;
 				next();
 			} catch (e) {
 				next(new Error('Scanne den QR-Code erneut oder überprüfe, ob Du den Link richtig abgeschrieben hast!'));
