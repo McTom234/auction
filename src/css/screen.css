@@ -72,45 +72,21 @@ body {
     height: 60%;
     padding: 10px;
 }
-.article {
-    font-size: 40pt;
-    margin-top:5pt;
-}
-.description {
-    text-align: center;
-}
-.price {
-    font-size: 20pt;
-    color:rgb(220,220,220);
-    transform: scale(1);
-    animation: priceupdate 0.2s forwards;
-    margin-top: 5pt;
-}
 
 
-.product-content img {
-    object-fit: contain;
-    object-position: center;
-    max-width: 100%;
-    max-height: 100%;
-    border-radius: 8px;
-    min-width: 20vw;
-    flex-grow: 1;
-}
-
-.product-content .product-name {
+ .product-name {
     margin-top: 10px;
     font-size: 50px;
     font-weight: 1000;
     letter-spacing: 3px;
 }
 
-.product-content .product-price {
+ .product-price {
     letter-spacing: 1px;
     font-size: 40px;
 }
 
-.product-content .product-price b {
+ .product-price b {
     font-weight: 100;
 }
 

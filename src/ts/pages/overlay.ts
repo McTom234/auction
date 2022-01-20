@@ -8,7 +8,7 @@ const socket = connectSocket('overlay');
 socket.on('price', msg => {
 	// animation
 	const el = document.getElementById('preis');
-	el.innerHTML = msg + '€';
+	el.innerHTML = msg.toFixed(2) + '€';
 	el.style.animation = 'none';
 	el.offsetHeight; /* trigger reflow */
 	el.style.animation = null;

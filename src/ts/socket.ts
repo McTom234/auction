@@ -28,9 +28,9 @@ const server = createServer(app);
 app.use(express.static('dist'));
 const io = new Server(server);
 
+
 // current state
 let state: State = {
-	auctionId: 0,
 	currentProduct: 0,
 	currentPrice: 0,
 	state: 'lobby',
@@ -53,17 +53,17 @@ io.use(async(socket: AuctionSocket, next) => {
 
 				socket.type = socket.handshake.auth.type;
 				if (socket.user_data.user_type !== 'admin' &&  socket.type !== "client") {
-					next(new Error("Du hast keine Rechte, auf diese Seite zuzugreifen."));
+					next(new Error("Sie haben keine Rechte, auf diese Seite zuzugreifen."));
 				}
 
 				next();
 			} catch (e) {
-				next(new Error('Scanne den QR-Code erneut oder überprüfe, ob Du den Link richtig abgeschrieben hast!'));
+				next(new Error('Bitte scannen Sie den QR-Code erneut oder überprüfen Sie, ob Sie den Link richtig abgeschrieben haben.'));
 			}
 		})
 		.catch(error => {
 			console.error(error);
-			next(new Error('Authentifizierungsserver nicht erreichbar. Überprüfe deine Internetverbindung!'));
+			next(new Error('Authentifizierungsserver nicht erreichbar. Bitte überprüfen Sie ihre Internetverbindung!'));
 		});
 });
 
@@ -75,7 +75,6 @@ function getUserCount () {
 }
 
 let sendUserCount = () => {
-	console.log('Sending user count');
 	io.in('overlay')
 		.in('presenter')
 		.emit('user-count', getUserCount());
@@ -110,7 +109,7 @@ io.on('connection', (socket: AuctionSocket) => {
 			if (!msg) return;
 
 			if (socket.user_data.user_type !== 'bidder') {
-				return socket.emit('error', 'Dein Nutzer hat keine Berechtigung, Gebote abzusenden. ');
+				return socket.emit('error', 'Sie haben keine Berechtigung, Gebote abzusenden.');
 			}
 
 			// validation
@@ -159,14 +158,6 @@ io.on('connection', (socket: AuctionSocket) => {
 			state.state = 'started';
 			state.currentProduct = 0;
 			state.currentPrice = products[state.currentProduct].price;
-			state.currentHistory = [];
-			state.auctionId = Math.round(Math.random() * 100000);
-
-			io.in('presenter')
-				.emit('history', {
-					reset: true,
-					payload: []
-				});
 
 			// publish data
 			io.emit('state', state.state);
@@ -174,6 +165,21 @@ io.on('connection', (socket: AuctionSocket) => {
 			io.emit('product', products[state.currentProduct]);
 		});
 
+		// reset event
+		socket.on('reset', ()=>{
+			state = {
+				currentProduct: 0,
+				currentPrice: 0,
+				state: 'lobby',
+				currentHistory: []
+			};
+			io.in('presenter')
+				.emit('history', {
+					reset: true,
+					payload: []
+				});
+			io.emit('state', state.state);
+		})
 		// next-product event
 		socket.on('next-product', () => {
 			// validation

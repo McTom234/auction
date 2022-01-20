@@ -22,13 +22,13 @@
                 <div class="imagewrapper">
                     <img src id="image"/>
                 </div>
-                <span class="article" id="name">Müll</span>
-                <span class="description" id="description">Stinkende Objekte, mit Glück in einem Plastiksack gelagert.</span>
-                <span class="price" id="preis">Aktuelles Gebot: 8,99€</span>
+                <span class="article" id="name"></span>
+                <span class="description" id="description"></span>
+                <span class="price" id="preis">Aktuelles Gebot: </span>
             </div>
             <form class="bet" action="javascript:void(0)">
-                <input placeholder="Gebot eingeben" type="text" id="bid"/>
-                <label for="bid" style="display: none">Dein Gebot eingeben</label>
+                <input placeholder="Gebot eingeben" type="number" id="bid" min="100" step=".01"/>
+                <label for="bid" style="display: none">Ihr Gebot</label>
                 <button class="sendbet" id="sendbid">Bieten!</button>
             </form>
         </div>

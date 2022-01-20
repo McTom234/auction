@@ -96,4 +96,9 @@
     margin-top: 10pt;
     text-align: center;
     border: none;
+    transition: ease-in-out 100ms;
+}
+
+.sendbet:active {
+    transform: scale(0.9);
 }
