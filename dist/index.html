@@ -9,45 +9,35 @@
 </head>
 <body>
 <div id="content">
-    <div id="lobby" style="display: none">
-        <div class="main">
-            <div class="card">
-                Bitte warten Sie, bis die Auktion gestartet wird.
-            </div>
+    <div id="lobby" class="main" style="display: none">
+        <div class="card">
+            <span class="bottom">Bitte warten Sie, bis die Auktion gestartet wird.</span>
         </div>
     </div>
-    <div id="started" style="display: none">
-        <div class="main">
-            <div class="card">
-                <div class="imagewrapper">
-                    <img src id="image"/>
-                </div>
-                <span class="article" id="name"></span>
-                <span class="description" id="description"></span>
-                <span class="price" id="preis">Aktuelles Gebot: </span>
-            </div>
-            <form class="bet" action="javascript:void(0)">
-                <input placeholder="Gebot eingeben" type="number" id="bid" min="100" step=".01"/>
-                <label for="bid" style="display: none">Ihr Gebot</label>
-                <button class="sendbet" id="sendbid">Bieten!</button>
-            </form>
+    <div id="started" class="main" style="display: none">
+        <div class="card">
+            <img src id="image"/>
+            <span class="article" id="name"></span>
+            <span class="description" id="description"></span>
+            <span class="price" id="preis"></span>
+        </div>
+        <form class="bet" action="javascript:void(0)">
+            <input placeholder="Gebot eingeben" type="number" id="bid"/>
+            <label for="bid" style="display: none">Ihr Gebot</label>
+            <button class="sendbet" id="sendbid">Bieten!</button>
+        </form>
+    </div>
+    <div id="over" class="main" style="display: none">
+        <div class="card">
+            <span class="bottom">Die Auktion ist beendet. Vielen Dank, dass Sie dabei waren.</span>
         </div>
     </div>
-    <div id="over" style="display: none">
-        <div class="main">
-            <div class="card">
-                Die Auktion ist beendet. Vielen Dank, dass Sie dabei waren.
-            </div>
+    <div id="error" class="main" style="display: none">
+        <div class="card">
+            Es ist ein Fehler aufgetreten.
+            <span id="error-text"></span>
         </div>
     </div>
-  <div id="error" style="display: none">
-    <div class="main">
-      <div class="card">
-        Es ist ein Fehler aufgetreten.
-        <span id="error-text"></span>
-      </div>
-    </div>
-  </div>
 </div>
 <script src="index.js"></script>
 </body>

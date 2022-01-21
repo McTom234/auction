@@ -9,7 +9,7 @@ body {
     font-size: 40px;
     line-height: 1;
     margin: 0;
-    background: transparent;
+    background: black;
 }
 
 * {
@@ -18,7 +18,7 @@ body {
 
 .user-count {
     position: fixed;
-   
+
     padding: 20px;
     letter-spacing: 1px;
     color: white;

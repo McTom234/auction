@@ -11,7 +11,7 @@ let price: number = 0;
 socket.on('price', msg => {
 	// animation
 	const el = document.getElementById('preis');
-	el.innerHTML = msg.toFixed(2) + '€';
+	el.innerHTML = msg.toFixed(2).replace('.', ',') + '€';
 	el.style.animation = 'none';
 	el.offsetHeight; /* trigger reflow */
 	el.style.animation = null;
