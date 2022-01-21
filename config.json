@@ -1,9 +1,0 @@
-{
-    "server": {
-      "serverUrl": "https://vbid.cluborganizer.de/api/token",
-      "jwtSecret": "$2a$10$wrLKVqw6/3hw+SE3LR0YmA9t4i5zDOgab23iLnMM6BpvbeIucwzoE"
-    },
-    "auction": {
-      "minAmount": 0.01
-    }
-  }
