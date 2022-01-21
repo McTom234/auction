@@ -4,23 +4,15 @@ import { createServer } from 'http';
 import { verify } from 'jsonwebtoken';
 import fetch from 'node-fetch';
 import { Server } from 'socket.io';
-import { AuctionSocket, State, UserData, BidHistory } from './models';
+import { AuctionSocket, State, UserData, BidHistory, Config, Product } from './models';
 import { validate } from './util/validFormat';
 import fs from 'fs';
 
 // products DB file
-const products = JSON.parse(readFileSync('./products.json', 'utf-8'));
+const products: Product[] = JSON.parse(readFileSync('./products.json', 'utf-8'));
 
 // config file
-const config: {
-	server: {
-		serverUrl: string
-		jwtSecret: string
-	}
-	auction: {
-		minAmount: number
-	}
-} = JSON.parse(readFileSync('./config.json', 'utf-8'));
+const config: Config = JSON.parse(readFileSync('./config.json', 'utf-8'));
 
 // socket.io and http server setup
 const app = express();
@@ -33,27 +25,28 @@ const io = new Server(server);
 let state: State = {
 	currentProduct: 0,
 	currentPrice: 0,
+	startTime: new Date(),
 	state: 'lobby',
 	currentHistory: []
 };
 
 // auth middleware
 io.use(async(socket: AuctionSocket, next) => {
-	fetch(config.server.serverUrl, {
+	fetch(config.serverUrl, {
 		method: 'POST',
 		body: JSON.stringify({ secret: socket.handshake.auth.token })
 	})
 		.then(res => res.json())
 		.then((json: any) => {
 			try {
-				socket.user_data = verify(json.token, config.server.jwtSecret) as UserData;
+				socket.user_data = verify(json.token, config.jwtSecret) as UserData;
 
 
 				// non-admin users are only allowed to connect as a client
 
 				socket.type = socket.handshake.auth.type;
-				if (socket.user_data.user_type !== 'admin' &&  socket.type !== "client") {
-					next(new Error("Sie haben keine Rechte, auf diese Seite zuzugreifen."));
+				if (socket.user_data.user_type !== 'admin' && socket.type !== 'client') {
+					next(new Error('Sie haben keine Rechte, auf diese Seite zuzugreifen.'));
 				}
 
 				next();
@@ -114,10 +107,18 @@ io.on('connection', (socket: AuctionSocket) => {
 
 			// validation
 			let minAdd = 0.01;
-			if (config.auction.minAmount !== undefined) minAdd = config.auction.minAmount;
+			if (products[state.currentProduct].minStep !== undefined) minAdd = products[state.currentProduct].minStep;
 			const newPriceInput = validate(msg, state.currentPrice, minAdd);
 
-			if (newPriceInput instanceof Error) return socket.emit('error', newPriceInput.message);
+			if (newPriceInput instanceof Error) {
+				socket.emit('error', newPriceInput.message);
+				setTimeout(() => {
+					socket.emit('state', state.state)
+					socket.emit('product', products[state.currentProduct]);
+					socket.emit('price', state.currentPrice);
+				}, 2000)
+				return;
+			}
 
 			// add bid
 			state.currentPrice = newPriceInput;
@@ -136,7 +137,8 @@ io.on('connection', (socket: AuctionSocket) => {
 			io.in('presenter')
 				.emit('history', {
 					reset: false,
-					payload: [state.currentHistory[state.currentHistory.length - 1]]
+					payload: [state.currentHistory[state.currentHistory.length - 1]],
+					asgf: ""
 				});
 		});
 	}
@@ -157,6 +159,7 @@ io.on('connection', (socket: AuctionSocket) => {
 			// init
 			state.state = 'started';
 			state.currentProduct = 0;
+			state.startTime = new Date();
 			state.currentPrice = products[state.currentProduct].price;
 
 			// publish data
@@ -166,10 +169,11 @@ io.on('connection', (socket: AuctionSocket) => {
 		});
 
 		// reset event
-		socket.on('reset', ()=>{
+		socket.on('reset', () => {
 			state = {
 				currentProduct: 0,
 				currentPrice: 0,
+				startTime: new Date(),
 				state: 'lobby',
 				currentHistory: []
 			};
@@ -179,7 +183,7 @@ io.on('connection', (socket: AuctionSocket) => {
 					payload: []
 				});
 			io.emit('state', state.state);
-		})
+		});
 		// next-product event
 		socket.on('next-product', () => {
 			// validation
@@ -192,6 +196,7 @@ io.on('connection', (socket: AuctionSocket) => {
 			state.currentProduct += 1;
 			state.currentPrice = products[state.currentProduct].price;
 			state.currentHistory = [];
+			state.startTime = new Date();
 
 			// publish
 			io.in('presenter')
