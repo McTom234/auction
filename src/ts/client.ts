@@ -39,7 +39,10 @@ export function connectSocket (room: any) {
 	// connect_error event
 	socket.on('connect_error', err => {
 		console.log('Server returned error during connection: ' + JSON.stringify(err));
-		showPage('error', {id: 'error-text', text: err.message});
+		showPage('error', {
+			id: 'error-text',
+			text: err.message
+		});
 	});
 
 	// state event
@@ -50,7 +53,10 @@ export function connectSocket (room: any) {
 	// error event
 	socket.on('error', msg => {
 		console.error('Server returned error: ' + JSON.stringify(msg));
-		showPage('error', {id: 'error-text', text: msg});
+		showPage('error', {
+			id: 'error-text',
+			text: msg
+		});
 	});
 
 	return socket;
