@@ -6,7 +6,7 @@ export function validate (input: string | number, currentPrice: number, minAdd: 
 	input = parseFloat(parseFloat(input.replace(',', '.'))
 		                   .toFixed(2));
 
-	if (input < (currentPrice + minAdd)) return new Error('Dein Gebot muss höher sein, als das Letzte!');
+	if (input < (currentPrice + minAdd)) return new Error(`Dein Gebot muss ${minAdd.toFixed(2).replace('.', ',')}€ höher sein, als das Letzte!`);
 
 	return input;
 }
