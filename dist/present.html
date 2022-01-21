@@ -1,76 +1,79 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" href="favicon.png">
     <title>Auktion – Admin</title>
-  </head>
-  <body>
-    <div class="navbar navbar-light bg-light">
-      <div class="container-fluid">
+</head>
+<body>
+<div class="navbar navbar-light bg-light">
+    <div class="container-fluid">
         <a class="navbar-brand">Auktion</a>
         <span class="navbar-text">
           Nutzer online: <span id="online"></span>
         </span>
-      </div>
     </div>
-    <div id="content" class="container fluid mt-2">
-      <div id="lobby" style="display: none" class="">
-        Die Auktion wurde noch nicht gestartet <br  />
-        <button class="btn btn-primary mt-2" id="button-start">
-          Auktion starten
-        </button>
-      </div>
-      <div id="started" style="display: none">
-
+</div>
+<div id="content" class="container fluid mt-2">
+    <div id="lobby" style="display: none" class="">
+        Die Auktion wurde noch nicht gestartet <br/>
+        <button class="btn btn-primary mt-2" id="button-start">Auktion starten</button>
+    </div>
+    <div id="started" style="display: none">
+        
         <div class="d-grid gap-2 fluid">
-          <button class="btn btn-primary" type="button"  id="button-next">Nächstes Produkt</button>
+            <button class="btn btn-primary" type="button" id="button-next">Nächstes Produkt</button>
         </div>
-
-        </button>
+    
         <h3 class="mt-3">Produkt</h3>
-        <div class="card fluid" >
-          <div class="card-body">
-            <h5 class="card-title"><span id="name"></span></h5>
-
-            <p class="card-text">
-              <img id="image" style="width: 20vh; height: 20vh; object-fit: contain" class="card-img-top"/><br  />
-              <span id="description"></span>
-            </p>
-          </div>
+        <div class="card fluid">
+            <div class="card-body">
+                <h5 class="card-title"><span id="name"></span></h5>
+                
+                <p class="card-text">
+                    <img id="image" style="max-width: 400px; max-height: 400px; object-fit: contain" class="card-img-top"/><br/>
+                    <p id="description"></p>
+                </p>
+            </div>
         </div>
-
-  <h3 class="mt-3">Gebote</h3>
-  <div class="card mt-2 fluid">
-    <div class="card-body">
-      <h5 class="card-title">Aktuelles Gebot: <b><span id="preis"></span> </b></h5>
-
-      <p class="card-text">
-      <table class="table mt-2">
-        <thead>
-        <th>Uhrzeit</th>
-        <th>Bieter</th>
-        <th>Gebot</th>
-        </thead>
-        <tbody id="history"></tbody>
-      </table>
-      </p>
+        
+        <h3 class="mt-3">Gebote</h3>
+        <div class="card mt-2 fluid">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Aktuelles Gebot: <b><span id="preis"></span></b>
+                    <br>
+                    Ziel: <b><span id="goal"></span></b>
+                    <br>
+                    Schritt: <b><span id="minStep"></span></b>
+                </h5>
+                
+                <p class="card-text">
+                <table class="table mt-2">
+                    <thead>
+                    <th>Uhrzeit</th>
+                    <th>Bieter</th>
+                    <th>Gebot</th>
+                    </thead>
+                    <tbody id="history"></tbody>
+                </table>
+                </p>
+            </div>
+        </div>
+    
     </div>
-  </div>
-
-      </div>
-      <div id="over" style="display: none">
-        Die Auktion ist beendet. <br  />
+    <div id="over" style="display: none">
+        Die Auktion ist beendet. <br/>
         <button class="btn btn-primary mt-2" id="button-reset">
-          Auktion zurücksetzen
+            Auktion zurücksetzen
         </button>
-      </div>
-      <div id="error" style="display: none">
-        <div class="alert alert-danger"> Es ist ein Fehler aufgetreten.</div>
-      </div>
     </div>
-    <script src="present.js" type="application/javascript"></script>
-  </body>
+    <div id="error" style="display: none">
+        <div class="alert alert-danger"> Es ist ein Fehler aufgetreten.</div>
+    </div>
+</div>
+<script src="present.js" type="application/javascript"></script>
+</body>
 </html>
