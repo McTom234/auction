@@ -36,9 +36,8 @@ body {
 }
 
 .card {
-    /*width:200pt;
-    height:480pt;*/
-    height: 70vh;
+
+    max-height: 90vh;
     width: calc(70vh / 280 * 200);
     background-image: url(../assets/holz.jpg);
     background-size: cover;
@@ -58,7 +57,7 @@ body {
     object-position: center;
 
     max-width: 100%;
-    max-height: 100%;
+    max-height: 60vh;
     border-radius: 5pt;
 
     margin: 10px;
@@ -76,12 +75,13 @@ body {
 
  .product-name {
     margin-top: 10px;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 1000;
     letter-spacing: 3px;
 }
 
  .product-price {
+     margin-top: 10px;
     letter-spacing: 1px;
     font-size: 40px;
 }

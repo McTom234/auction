@@ -45,6 +45,7 @@ body {
     flex-direction: column;
     padding: 20px;
     color:white;
+    max-width: 40vw;
 }
 
 .product-content img {

@@ -1,63 +1,64 @@
 [
     {
         "name": "Personalisiertes Happy Birthday vom Musikkurs",
-        "image": "https://vbid.cluborganizer.de/mu12.webp",
-        "description": "Unser Musikkurs singt für Sie oder ein Geburtstagskind Ihrer Wahl ein personalisiertes Geburtstagsständchen: „Happy Birthday\" (deutsch / englisch). Dies erhalten Sie in einem gängigen Musikformat.",
+        "image": "1_Birthday.webp",
+        "description": "Unser Musikkurs singt für Sie oder ein Geburtstagskind Ihrer Wahl ein personalisiertes mehrstimmiges Geburtstagsständchen (Happy Birthday). Dies erhalten Sie in einem gängigen Musikformat.",
         "price": 0,
         "minStep": 2,
         "goal": 10
     },
     {
         "name": "Lob von Herrn Blum",
-        "image": "",
-        "description": "Haben Sie sich schon immer gewünscht von Ihrem Schulleiter*in ein Lob zu erhalten. Wenn ja, ist das Ihrer Gelegenheit. Ersteigern Sie Ihr Lob zum immer wieder anhören.",
+        "image": "2_Lob.webp",
+        "description": "Haben Sie sich schon immer gewünscht, von Ihrem Schulleiter ein Lob zu erhalten? Wenn ja, ist das Ihre Gelegenheit. Ersteigern Sie Ihr Lob zum immer wieder anhören. ",
         "price": 0,
         "minStep": 2,
         "goal": 10
     },
     {
-        "name": "Rasenmähen mit Arwed und Jasper",
-        "image": "https://vbid.cluborganizer.de/arja.webp",
-        "description": "Auf Ihrer Terrasse sitzen und anderen beim Arbeiten zugucken? Dann ist das Ihre Chance. Arwed und Jasper kommen zu Ihnen und mähen Ihren Rasen. Auf Wunsch und jahreszeitenabhängig auch oberkörperfrei.",
+        "name": "Oberkörperfreies Rasenmähen mit Arwed und Jasper ",
+        "image": "3_Rasenmähen.webp",
+        "description": "Sie wollen auf Ihrer Terrasse sitzen und anderen beim Arbeiten zugucken? Dann ist das Ihre Chance. Arwed und Jasper kommen zu Ihnen und mähen Ihren Rasen.",
         "price": 20,
         "minStep": 5,
         "goal": 50
     },
     {
         "name": "Wochenende im Kneippkurort Buckow in der Märkischen Schweiz",
-        "image": "",
+        "image": "4_Wochenende.webp",
         "description": "Ferienwohnung “Esche” für 2 bis 4 Personen in Villa Walnuss in Buckow, 50 km vom Berliner Stadtzentrum<br/>Max. 3 Nächte und 4 Tage (Freitag bis Montag)",
         "price": 180,
         "minStep": 20,
         "goal": "300€ - 400€"
     },
     {
-        "name": "Lernzettel Geschichte Leistungskurs",
-        "image": "",
-        "description": "Zu Geschichte fällt Ihnen gerade noch ein: \"753 - Rom schlüpft aus dem Ei\"? Schade. Im Abitur drehen sich die Ereignisse um Fragen ab dem 18. Jahrhundert. Hiermit haben Sie die Chance Ihre Lücken zu füllen und Ihr Kind beim Geschichts-Abitur zu unterstützen.<br><br>Inhalt ohne Gewähr",
+        "name": "Lernzettel Geschichte-LK",
+        "image": "5_Lernzettel_Geschichte.webp",
+        "description": "Zu Geschichte fällt Ihnen gerade noch ein: “753 - Rom schlüpft aus dem Ei”? Schade. Im Abitur drehen sich die Ereignisse um Fragen ab dem 18. Jahrhundert. Hiermit haben Sie die Chance, Ihre Lücken zu füllen und Ihr Kind beim Geschichte-Abitur zu unterstützen. Auch direkt für künftige Abiturient*innen geeignet.",
         "price": 5,
         "minStep": 2,
         "goal": 15
     },
     {
-        "name": "Lernzettel Mathe GK / Upgrade Abikenntnisse vor 2000",
-        "image": "",
-        "description": "Sie sind von den Mathefragen Ihres Kindes schlichtweg überfordert? Upgraden Sie Ihr Mathewissen mit den Lernzetteln vom Mathe Grundkurs.<br><br>Inhalt ohne Gewähr",
+        "name": "Lernzettel Mathe-GK",
+        "image": "6_Lernzettel_Mathe.webp",
+        "description": "Ihr – und auch Eure Eltern – seid von den Mathefragen der Sek. 2 schlichtweg überfordert? Diese Lernzettel vom Mathe-Grundkurs sind das perfekte Upgrade.",
         "price": 5,
-        "minStep": 2,
+        "minStep": 1,
         "goal": 15
     },
+
     {
-        "name": "Lernzettel Paket 12.1",
-        "image": "",
-        "description": "In diesem Paket befinden sich sehr sehr hilfreiche und ästhetisch ansprechende Lernzettel für das erste Quartal in der 12. Klasse.<br>Enthalten sind die Fächer: Englisch LK; Geschichte LK und Deutsch GK.",
+        "name": "Lernzettel-Paket 12.1",
+        "image": "7_Lernzettel_12_1.webp",
+        "description": "In diesem Paket befinden sich sehr sehr hilfreiche und ästhetisch ansprechende Lernzettel für das erste Quartal der 12. Klasse.<br>Enthalten sind die Fächer: Englisch-LK, Geschichte-LK und Deutsch-GK.",
         "price": 5,
         "minStep": 2,
         "goal": 20
     },
     {
         "name": "Friedenskirche",
-        "image": "",
+        "image": "8_Friedenskirche.webp",
         "description": "Potsdamer Ansicht 1: Friedenskirche (A3, Caroline Rabe)",
         "price": 5,
         "minStep": 5,
@@ -65,7 +66,7 @@
     },
     {
         "name": "Belvedere auf dem Klausberg",
-        "image": "",
+        "image": "9_Belvedere.webp",
         "description": "Potsdamer Ansicht 2: Belvedere auf dem Klausberg (A3, Caroline Rabe)",
         "price": 5,
         "minStep": 5,
@@ -73,7 +74,7 @@
     },
     {
         "name": "Orangerie",
-        "image": "",
+        "image": "10_Orangerie.webp",
         "description": "Potsdamer Ansicht 3: Orangerie (A3, Caroline Rabe)",
         "price": 5,
         "minStep": 5,
@@ -81,10 +82,18 @@
     },
     {
         "name": "Venedig",
-        "image": "",
+        "image": "11_Venedig.webp",
         "description": "Venezianische Ansicht (A4, Maja Wedler)",
         "price": 5,
         "minStep": 5,
         "goal": "30€ - 60€"
+    },
+    {
+        "name": "Stillleben",
+        "image": "12_Stilleben.webp",
+        "description": "Stillleben auf Leinwand (A3, Luise Zimmermann)",
+        "price": 5,
+        "minStep": 5,
+        "goal": "–"
     }
 ]
