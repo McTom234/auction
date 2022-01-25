@@ -50,6 +50,7 @@ body {
     flex-direction: column;
     font-family: paris;
     color:white;
+    text-align: center;
 }
 
 .card img {
