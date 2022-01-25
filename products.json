@@ -49,9 +49,9 @@
     },
 
     {
-        "name": "Lernzettel-Paket 12.1",
-        "image": "7_Lernzettel_12_1.webp",
-        "description": "In diesem Paket befinden sich sehr sehr hilfreiche und ästhetisch ansprechende Lernzettel für das erste Quartal der 12. Klasse.<br>Enthalten sind die Fächer: Englisch-LK, Geschichte-LK und Deutsch-GK.",
+        "name": "Lernzettel Biologie-GK & Englisch-GK",
+        "image": "14_Lernzettel_Englisch.webp",
+        "description": "In diesem Paket befinden sich sehr sehr hilfreiche und ästhetisch ansprechende Lernzettel für die Fächer Englisch und Biologie.",
         "price": 5,
         "minStep": 2,
         "goal": 20
@@ -95,5 +95,14 @@
         "price": 5,
         "minStep": 5,
         "goal": "–"
+    },
+    ,
+    {
+        "name": "Gedanken",
+        "image": "15_Malerei.webp",
+        "description": " (A3, Kathi)",
+        "price": 5,
+        "minStep": 5,
+        "goal": "100€"
     }
 ]
