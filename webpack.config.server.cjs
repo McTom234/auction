@@ -2,7 +2,7 @@ const path = require("path");
 module.exports = {
     target: 'node',
     entry: './src/ts/socket.ts',
-    mode: "development",
+    mode: "production",
     watch: true,
     watchOptions: {
         ignored: /node_modules/,

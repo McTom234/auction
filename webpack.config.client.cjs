@@ -7,7 +7,7 @@ module.exports = {
         overlay: ['./src/ts/pages/overlay.ts', './src/css/overlay.css'],
         screen: ['./src/ts/pages/overlay.ts', './src/css/screen.css']
     },
-    mode: "development",
+    mode: "production",
     watch: true,
     watchOptions: {
         ignored: /node_modules/,
